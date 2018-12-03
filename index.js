@@ -4,29 +4,41 @@
 *
 * */
 
-var leftSlide = function (btnWidth) {
+var leftSlide2 = function (obt) {
+
+    this.buttonWidth = obt.buttonWidth;    /*按钮宽度*/
+    this.slideDiv = obt.slideDiv;   /*滑动块类名*/
+    this.showDiv = obt.showDiv;     /*显示块类名*/
+    this.contentDiv = obt.contentDiv;   /*内容块类名*/
+    this.detDelete = obt.detDelete;   /*删除块类名*/
+
+}
+
+
+leftSlide2.prototype.init = function () {
+    var self = this;
 
     var touchStart;
     var touchmove;
     var touchStartY;
     var touchmoveY;
 
-    $('.list-li').each(function () {
+    $(self.slideDiv).each(function () {
 
-        var height = $(this).find('.li-content').innerHeight();
-        $(this).find('.li-del').css('height',height);
+        var height = $(this).find(self.contentDiv).innerHeight();
+        $(this).find(self.detDelete).css({'height':height,width:self.buttonWidth});
     });
 
-    $('.list-li').on('touchstart',function (e) {
+    $(self.slideDiv).on('touchstart',function (e) {
         // e.preventDefault();
         var touch = event.targetTouches[0];
         touchStart = touch.pageX;
         touchStartY = touch.pageY;
-        $(this).find('.li-div').removeClass('li-div-tran');
+        $(this).find(self.showDiv).removeClass('li-div-tran');
 
     });
 
-    $('.list-li').on('touchmove',function (e) {
+    $(self.slideDiv).on('touchmove',function (e) {
         // e.preventDefault();
         var touch = event.targetTouches[0];
         touchmove = touch.pageX;
@@ -36,25 +48,25 @@ var leftSlide = function (btnWidth) {
         var moveHeight = touchmoveY - touchStartY;
 
         if(moveWidth>0&&moveHeight<50){
-            $(this).find('.li-div').css('transform', 'translateX(-'+moveWidth+'px)');
+            $(this).find(self.showDiv).css('transform', 'translateX(-'+moveWidth+'px)');
             if(moveWidth>70){
-                $(this).find('.li-div').addClass('li-div-tran');
-                $(this).find('.li-div').css('transform', 'translateX(-100px)');
+                $(this).find(self.showDiv).addClass('li-div-tran');
+                $(this).find(self.showDiv).css('transform', 'translateX(-'+ self.buttonWidth +'px)');
             }
         }else{
-            $(this).find('.li-div').addClass('li-div-tran');
-            $(this).find('.li-div').css('transform', 'translateX(0)');
+            $(this).find(self.showDiv).addClass('li-div-tran');
+            $(this).find(self.showDiv).css('transform', 'translateX(0)');
         }
     });
 
-    $('.list-li').on('touchend',function (e) {
+    $(self.slideDiv).on('touchend',function (e) {
         // e.preventDefault();
         var moveWidth = touchStart - touchmove;
         // var moveHeight = touchStartY - touchmoveY;
         if(moveWidth>0){
             if(moveWidth<70){
-                $(this).find('.li-div').addClass('li-div-tran');
-                $(this).find('.li-div').css('transform', 'translateX(0)');
+                $(this).find(self.showDiv).addClass('li-div-tran');
+                $(this).find(self.showDiv).css('transform', 'translateX(0)');
             }
         }
     });
@@ -63,4 +75,9 @@ var leftSlide = function (btnWidth) {
 
 
 
-leftSlide();
+
+
+
+
+
+

@@ -6,11 +6,9 @@
 body,html{
     height: 100%;
     width:100%;
-    overflow:hidden;
 }
 ul{
     width:100%;
-    height:28.4rem;
 }
 .list-li{
     width:100%;
@@ -19,6 +17,7 @@ ul{
     background:pink;
     border-bottom: 3px solid white;
     /*position: relative;*/
+    overflow: hidden;
 }
 .li-div{
     width: 100%;
@@ -37,7 +36,7 @@ ul{
     vertical-align: middle;
 }
 .li-del{
-    width: 100px;
+    /*width: 100px;*/
     /*float: right;*/
     background-color: red;
     display: inline-flex;
