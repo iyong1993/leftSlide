@@ -24,6 +24,7 @@ ul{
     /*height: 100%;*/
     /*position: absolute;*/
     white-space: nowrap;
+    font-size: 0;
 }
 .li-div-tran{
     transition: all 300ms;
@@ -34,6 +35,7 @@ ul{
     height: 100px;
     /*float: left;*/
     vertical-align: middle;
+    font-size: 14px;
 }
 .li-del{
     /*width: 100px;*/
@@ -44,4 +46,5 @@ ul{
     align-items: center;
     vertical-align: middle;
     color: white;
+    font-size: 16px;
 }

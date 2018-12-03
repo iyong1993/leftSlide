@@ -27,6 +27,7 @@ leftSlide2.prototype.init = function () {
 
         var height = $(this).find(self.contentDiv).innerHeight();
         $(this).find(self.detDelete).css({'height':height,width:self.buttonWidth});
+        $(this).attr('if-open','false');
     });
 
     $(self.slideDiv).on('touchstart',function (e) {
@@ -35,7 +36,6 @@ leftSlide2.prototype.init = function () {
         touchStart = touch.pageX;
         touchStartY = touch.pageY;
         $(this).find(self.showDiv).removeClass('li-div-tran');
-
     });
 
     $(self.slideDiv).on('touchmove',function (e) {
@@ -46,33 +46,48 @@ leftSlide2.prototype.init = function () {
 
         var moveWidth = touchStart - touchmove;
         var moveHeight = touchmoveY - touchStartY;
+        console.log($(this).attr('if-open'));
+        console.log($(this).attr('if-open')=='false');
 
-        if(moveWidth>0&&moveHeight<50){
-            $(this).find(self.showDiv).css('transform', 'translateX(-'+moveWidth+'px)');
-            if(moveWidth>70){
+        if($(this).attr('if-open')=='false'){
+            if(moveWidth>0&&moveHeight<50){
+                $(this).find(self.showDiv).css('transform', 'translateX(-'+moveWidth+'px)');
+                if(moveWidth>50){
+                    $(this).find(self.showDiv).addClass('li-div-tran');
+                    $(this).find(self.showDiv).css('transform', 'translateX(-'+ self.buttonWidth +'px)');
+                    $(this).attr('if-open','true');
+                }
+            }else{
                 $(this).find(self.showDiv).addClass('li-div-tran');
-                $(this).find(self.showDiv).css('transform', 'translateX(-'+ self.buttonWidth +'px)');
+                $(this).find(self.showDiv).css('transform', 'translateX(0)');
+                $(this).attr('if-open','false');
             }
-        }else{
+        }
+
+        if(moveWidth<0){
             $(this).find(self.showDiv).addClass('li-div-tran');
             $(this).find(self.showDiv).css('transform', 'translateX(0)');
+            $(this).attr('if-open','false');
         }
     });
 
     $(self.slideDiv).on('touchend',function (e) {
         // e.preventDefault();
         var moveWidth = touchStart - touchmove;
-        // var moveHeight = touchStartY - touchmoveY;
         if(moveWidth>0){
             if(moveWidth<70){
                 $(this).find(self.showDiv).addClass('li-div-tran');
                 $(this).find(self.showDiv).css('transform', 'translateX(0)');
+                $(this).attr('if-open','false');
             }
         }
     });
 
-}
+    $(self.detDelete).on('click',function () {
+        $(this).parents(self.slideDiv).remove();
+    });
 
+}
 
 
 
