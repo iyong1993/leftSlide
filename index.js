@@ -4,7 +4,7 @@
 *
 * */
 
-var leftSlide2 = function (obt) {
+var leftSlide = function (obt) {
 
     this.buttonWidth = obt.buttonWidth;    /*按钮宽度*/
     this.slideDiv = obt.slideDiv;   /*滑动块类名*/
@@ -15,7 +15,7 @@ var leftSlide2 = function (obt) {
 }
 
 
-leftSlide2.prototype.init = function () {
+leftSlide.prototype.init = function () {
     var self = this;
 
     var touchStart;
